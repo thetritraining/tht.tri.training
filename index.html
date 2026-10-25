@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="The Tri Training : préparation triathlon. Natation, vélo, course à pied. Contact et réseaux sociaux.">
+<title>The Tri Training</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Hanken+Grotesk:wght@300;400;500;600&display=swap">
+<style>
+  /* Concept: one dark, quiet column. Wordmark and a scaled distance chart carry the page; contact closes it. */
+  :root {
+    --bg: #0d0e0f;
+    --surface: #141618;
+    --fg: #ece8e1;
+    --muted: #8f8c86;
+    --line: #2a2c2f;
+    --accent: #c8a96a;
+    --accent-ink: #0d0e0f;
+    --swim: #8d9aa0;
+    --bike: #c8a96a;
+    --run: #ece8e1;
+    --font-display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+    --font-body: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #f2f2ef;
+      --surface: #e9e9e5;
+      --fg: #15171a;
+      --muted: #66645f;
+      --line: #d3d3ce;
+      --accent: #8a6a2c;
+      --accent-ink: #f2f2ef;
+      --swim: #6f7f87;
+      --bike: #8a6a2c;
+      --run: #15171a;
+      color-scheme: light;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #f2f2ef;
+    --surface: #e9e9e5;
+    --fg: #15171a;
+    --muted: #66645f;
+    --line: #d3d3ce;
+    --accent: #8a6a2c;
+    --accent-ink: #f2f2ef;
+    --swim: #6f7f87;
+    --bike: #8a6a2c;
+    --run: #15171a;
+    color-scheme: light;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    padding-block: 1.5rem 3rem;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 62rem; margin-inline: auto; display: flex; flex-direction: column; gap: 5rem; }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* Top bar */
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; padding-bottom: 1.25rem; border-bottom: 1px solid var(--line); }
+  .top-right { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+  .top .handle { font-size: 0.8125rem; letter-spacing: 0.08em; color: var(--muted); }
+  .lang { display: flex; gap: 0.25rem; }
+  .lang button {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid transparent;
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    font-weight: 500;
+    padding: 0.35rem 0.5rem;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .lang button:hover { color: var(--fg); }
+  .lang button[aria-pressed="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* Hero */
+  .hero { display: flex; flex-direction: column; gap: 1.75rem; padding-top: 1.5rem; }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(3rem, 12vw, 7.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .lede { max-width: 34rem; font-size: 1.125rem; font-weight: 300; color: var(--fg); margin: 0; }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.8rem 1.4rem;
+    border: 1px solid var(--line);
+    text-decoration: none;
+    font-size: 0.875rem;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+    background: transparent;
+    color: var(--fg);
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+  }
+  .btn:hover { border-color: var(--accent); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .btn.primary:hover { filter: brightness(1.08); }
+
+  /* Section heads */
+  .section-head { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.75rem, 5vw, 2.75rem);
+    line-height: 1.1;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  /* Disciplines */
+  .disciplines { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); }
+  .disc { padding: 1.5rem 1.5rem 1.5rem 0; display: flex; flex-direction: column; gap: 0.5rem; min-width: 0; }
+  .disc + .disc { padding-left: 1.5rem; border-left: 1px solid var(--line); }
+  .disc .chip { width: 2.25rem; height: 3px; }
+  .disc h3 { font-family: var(--font-display); font-weight: 400; font-size: 1.5rem; margin: 0.5rem 0 0; overflow-wrap: anywhere; }
+  .disc p { margin: 0; color: var(--muted); font-size: 0.9375rem; }
+  .c-swim { background: var(--swim); }
+  .c-bike { background: var(--bike); }
+  .c-run { background: var(--run); }
+
+  /* Formats */
+  .formats { display: flex; flex-direction: column; }
+  .format { display: grid; grid-template-columns: 10.5rem minmax(0, 1fr); gap: 0.5rem 1.5rem; padding: 1.25rem 0; border-top: 1px solid var(--line); align-items: center; }
+  .format:last-child { border-bottom: 1px solid var(--line); }
+  .format .name { font-family: var(--font-display); font-size: 1.25rem; }
+  .format .total { display: block; font-family: var(--font-body); font-size: 0.75rem; color: var(--muted); letter-spacing: 0.08em; font-variant-numeric: tabular-nums; }
+  .bar { display: flex; height: 0.75rem; gap: 2px; }
+  .seg { min-width: 3px; height: 100%; }
+  .legs { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; margin-top: 0.6rem; font-size: 0.8125rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .legs span { white-space: nowrap; }
+  .legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin-top: 1rem; font-size: 0.8125rem; color: var(--muted); }
+  .legend i { display: inline-block; width: 0.75rem; height: 0.75rem; margin-right: 0.5rem; vertical-align: -1px; }
+
+  /* Contact */
+  .contact { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 3rem; background: var(--surface); padding: clamp(1.5rem, 5vw, 3.5rem); }
+  .mail-block { display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
+  .mail {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 3.4vw, 1.6rem);
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+    user-select: all;
+    -webkit-user-select: all;
+    margin: 0;
+  }
+  .mail-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+  .status { font-size: 0.8125rem; color: var(--muted); min-height: 1.3em; }
+  .socials { display: flex; flex-direction: column; min-width: 0; }
+  .social { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 1rem 0; border-top: 1px solid var(--line); text-decoration: none; transition: color 0.2s; }
+  .social:last-child { border-bottom: 1px solid var(--line); }
+  .social:hover { color: var(--accent); }
+  .social .net { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+  .social .who { font-family: var(--font-display); font-size: 1.15rem; overflow-wrap: anywhere; text-align: right; }
+
+  footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem 1rem; padding-top: 1.25rem; border-top: 1px solid var(--line); font-size: 0.8125rem; color: var(--muted); }
+
+  @media (max-width: 720px) {
+    .wrap { gap: 3.5rem; }
+    .disciplines { grid-template-columns: 1fr; }
+    .disc, .disc + .disc { padding: 1.25rem 0; border-left: 0; }
+    .disc + .disc { border-top: 1px solid var(--line); }
+    .format { grid-template-columns: minmax(0, 1fr); }
+    .contact { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="top">
+    <span class="eyebrow" data-i="eyebrow_top">Préparation triathlon</span>
+    <div class="top-right">
+      <span class="handle">@the.tri.training</span>
+      <div class="lang" role="group" aria-label="Langue">
+        <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        <button type="button" data-lang="de" aria-pressed="false">DE</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <span class="eyebrow" data-i="eyebrow_hero">Natation · Vélo · Course à pied</span>
+    <h1>The Tri<br><em>Training</em></h1>
+    <p class="lede" data-i="lede">La préparation triathlon, du premier départ à la ligne d'arrivée. Retrouvez le contenu sur Instagram, TikTok et Facebook, ou écrivez directement.</p>
+    <div class="actions">
+      <a class="btn primary" href="https://www.instagram.com/the.tri.training" target="_blank" rel="noopener" data-i="btn_ig">Suivre sur Instagram</a>
+      <a class="btn" href="#contact" data-i="btn_contact">Contact</a>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-disc">
+    <div class="section-head">
+      <span class="eyebrow" data-i="disc_eyebrow">Les trois disciplines</span>
+      <h2 id="t-disc" data-i="disc_h2">Trois sports, une seule course.</h2>
+    </div>
+    <div class="disciplines">
+      <div class="disc">
+        <span class="chip c-swim"></span>
+        <h3 data-i="swim">Natation</h3>
+        <p data-i="swim_d">Technique, efficacité du geste et gestion de l'effort en eau libre.</p>
+      </div>
+      <div class="disc">
+        <span class="chip c-bike"></span>
+        <h3 data-i="bike">Vélo</h3>
+        <p data-i="bike_d">Endurance, puissance et position pour tenir la distance sans s'épuiser.</p>
+      </div>
+      <div class="disc">
+        <span class="chip c-run"></span>
+        <h3 data-i="run">Course à pied</h3>
+        <p data-i="run_d">Relancer sur des jambes fatiguées, le vrai juge de paix du triathlon.</p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-form">
+    <div class="section-head">
+      <span class="eyebrow" data-i="form_eyebrow">Les formats</span>
+      <h2 id="t-form" data-i="form_h2">Du sprint à l'Ironman, à l'échelle.</h2>
+    </div>
+    <div class="formats">
+      <div class="format">
+        <div class="name"><span data-i="f_sprint">Sprint</span><span class="total" data-total="25.75">25,75 km au total</span></div>
+        <div>
+          <div class="bar" role="img" aria-label="Sprint : 750 m nage, 20 km vélo, 5 km course">
+            <div class="seg c-swim" style="width:0.33%"></div><div class="seg c-bike" style="width:8.85%"></div><div class="seg c-run" style="width:2.21%"></div>
+          </div>
+          <div class="legs"><span data-leg="swim" data-v="0.75">750 m nage</span><span data-leg="bike" data-v="20">20 km vélo</span><span data-leg="run" data-v="5">5 km course</span></div>
+        </div>
+      </div>
+      <div class="format">
+        <div class="name"><span data-i="f_olympic">Olympique</span><span class="total" data-total="51.5">51,5 km au total</span></div>
+        <div>
+          <div class="bar" role="img" aria-label="Olympique : 1,5 km nage, 40 km vélo, 10 km course">
+            <div class="seg c-swim" style="width:0.66%"></div><div class="seg c-bike" style="width:17.7%"></div><div class="seg c-run" style="width:4.42%"></div>
+          </div>
+          <div class="legs"><span data-leg="swim" data-v="1.5">1,5 km nage</span><span data-leg="bike" data-v="40">40 km vélo</span><span data-leg="run" data-v="10">10 km course</span></div>
+        </div>
+      </div>
+      <div class="format">
+        <div class="name"><span data-i="f_703">70.3</span><span class="total" data-total="113">113 km au total</span></div>
+        <div>
+          <div class="bar" role="img" aria-label="70.3 : 1,9 km nage, 90 km vélo, 21,1 km course">
+            <div class="seg c-swim" style="width:0.84%"></div><div class="seg c-bike" style="width:39.8%"></div><div class="seg c-run" style="width:9.34%"></div>
+          </div>
+          <div class="legs"><span data-leg="swim" data-v="1.9">1,9 km nage</span><span data-leg="bike" data-v="90">90 km vélo</span><span data-leg="run" data-v="21.1">21,1 km course</span></div>
+        </div>
+      </div>
+      <div class="format">
+        <div class="name"><span data-i="f_ironman">Ironman</span><span class="total" data-total="226">226 km au total</span></div>
+        <div>
+          <div class="bar" role="img" aria-label="Ironman : 3,8 km nage, 180 km vélo, 42,2 km course">
+            <div class="seg c-swim" style="width:1.68%"></div><div class="seg c-bike" style="width:79.65%"></div><div class="seg c-run" style="width:18.67%"></div>
+          </div>
+          <div class="legs"><span data-leg="swim" data-v="3.8">3,8 km nage</span><span data-leg="bike" data-v="180">180 km vélo</span><span data-leg="run" data-v="42.2">42,2 km course</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="legend">
+      <span><i class="c-swim"></i><span data-i="swim">Natation</span></span>
+      <span><i class="c-bike"></i><span data-i="bike">Vélo</span></span>
+      <span><i class="c-run"></i><span data-i="run">Course à pied</span></span>
+      <span data-i="scale">Longueurs proportionnelles aux kilomètres.</span>
+    </div>
+  </section>
+
+  <section id="contact" class="contact" aria-labelledby="t-contact">
+    <div class="mail-block">
+      <span class="eyebrow" data-i="btn_contact">Contact</span>
+      <h2 id="t-contact" data-i="contact_h2">Écrivez-nous.</h2>
+      <p class="mail" id="mail-text">the.tri.training.contact@gmail.com</p>
+      <div class="mail-actions">
+        <a class="btn primary" href="mailto:the.tri.training.contact@gmail.com" data-i="btn_mail">Envoyer un e-mail</a>
+        <button class="btn" type="button" id="copy-btn" data-i="btn_copy">Copier l'adresse</button>
+      </div>
+      <span class="status" id="copy-status" role="status" aria-live="polite"></span>
+    </div>
+    <div class="socials">
+      <a class="social" href="https://www.instagram.com/the.tri.training" target="_blank" rel="noopener">
+        <span class="net">Instagram</span><span class="who">@the.tri.training</span>
+      </a>
+      <a class="social" href="https://www.tiktok.com/@the.tri.training" target="_blank" rel="noopener">
+        <span class="net">TikTok</span><span class="who">@the.tri.training</span>
+      </a>
+      <a class="social" href="https://www.facebook.com/the.tri.training" target="_blank" rel="noopener">
+        <span class="net">Facebook</span><span class="who">the.tri.training</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <span>The Tri Training</span>
+    <span data-i="eyebrow_hero">Natation · Vélo · Course à pied</span>
+  </footer>
+</main>
+
+<script>
+  (function () {
+    var T = {
+      fr: {
+        group: 'Langue',
+        eyebrow_top: 'Préparation triathlon',
+        eyebrow_hero: 'Natation · Vélo · Course à pied',
+        lede: "La préparation triathlon, du premier départ à la ligne d'arrivée. Retrouvez le contenu sur Instagram, TikTok et Facebook, ou écrivez directement.",
+        btn_ig: 'Suivre sur Instagram',
+        btn_contact: 'Contact',
+        disc_eyebrow: 'Les trois disciplines',
+        disc_h2: 'Trois sports, une seule course.',
+        swim: 'Natation', bike: 'Vélo', run: 'Course à pied',
+        swim_d: "Technique, efficacité du geste et gestion de l'effort en eau libre.",
+        bike_d: "Endurance, puissance et position pour tenir la distance sans s'épuiser.",
+        run_d: 'Relancer sur des jambes fatiguées, le vrai juge de paix du triathlon.',
+        form_eyebrow: 'Les formats',
+        form_h2: "Du sprint à l'Ironman, à l'échelle.",
+        f_sprint: 'Sprint', f_olympic: 'Olympique', f_703: '70.3', f_ironman: 'Ironman',
+        total: '{n} km au total',
+        leg: { swim: '{n} nage', bike: '{n} vélo', run: '{n} course' },
+        scale: 'Longueurs proportionnelles aux kilomètres.',
+        contact_h2: 'Écrivez-nous.',
+        btn_mail: 'Envoyer un e-mail',
+        btn_copy: "Copier l'adresse",
+        copied: 'Adresse copiée.',
+        select: 'Adresse sélectionnée, copiez-la avec votre clavier.'
+      },
+      en: {
+        group: 'Language',
+        eyebrow_top: 'Triathlon preparation',
+        eyebrow_hero: 'Swim · Bike · Run',
+        lede: 'Triathlon preparation, from the first start to the finish line. Find the content on Instagram, TikTok and Facebook, or write to us directly.',
+        btn_ig: 'Follow on Instagram',
+        btn_contact: 'Contact',
+        disc_eyebrow: 'The three disciplines',
+        disc_h2: 'Three sports, one race.',
+        swim: 'Swimming', bike: 'Cycling', run: 'Running',
+        swim_d: 'Technique, stroke efficiency and effort management in open water.',
+        bike_d: 'Endurance, power and position to hold the distance without burning out.',
+        run_d: 'Running on tired legs, the real test of triathlon.',
+        form_eyebrow: 'The formats',
+        form_h2: 'From sprint to Ironman, to scale.',
+        f_sprint: 'Sprint', f_olympic: 'Olympic', f_703: '70.3', f_ironman: 'Ironman',
+        total: '{n} km total',
+        leg: { swim: '{n} swim', bike: '{n} bike', run: '{n} run' },
+        scale: 'Bar lengths are proportional to kilometres.',
+        contact_h2: 'Get in touch.',
+        btn_mail: 'Send an email',
+        btn_copy: 'Copy address',
+        copied: 'Address copied.',
+        select: 'Address selected, copy it with your keyboard.'
+      },
+      de: {
+        group: 'Sprache',
+        eyebrow_top: 'Triathlon-Vorbereitung',
+        eyebrow_hero: 'Schwimmen · Rad · Laufen',
+        lede: 'Triathlon-Vorbereitung vom ersten Start bis zur Ziellinie. Finden Sie die Inhalte auf Instagram, TikTok und Facebook oder schreiben Sie uns direkt.',
+        btn_ig: 'Auf Instagram folgen',
+        btn_contact: 'Kontakt',
+        disc_eyebrow: 'Die drei Disziplinen',
+        disc_h2: 'Drei Sportarten, ein Rennen.',
+        swim: 'Schwimmen', bike: 'Radfahren', run: 'Laufen',
+        swim_d: 'Technik, Effizienz im Zug und Krafteinteilung im Freiwasser.',
+        bike_d: 'Ausdauer, Leistung und Position, um die Distanz durchzuhalten, ohne sich zu verausgaben.',
+        run_d: 'Auf müden Beinen laufen: die eigentliche Prüfung im Triathlon.',
+        form_eyebrow: 'Die Formate',
+        form_h2: 'Vom Sprint bis zum Ironman, maßstabsgetreu.',
+        f_sprint: 'Sprint', f_olympic: 'Olympisch', f_703: '70.3', f_ironman: 'Ironman',
+        total: '{n} km gesamt',
+        leg: { swim: '{n} Schwimmen', bike: '{n} Rad', run: '{n} Laufen' },
+        scale: 'Die Balkenlängen sind proportional zu den Kilometern.',
+        contact_h2: 'Schreiben Sie uns.',
+        btn_mail: 'E-Mail senden',
+        btn_copy: 'Adresse kopieren',
+        copied: 'Adresse kopiert.',
+        select: 'Adresse markiert, mit der Tastatur kopieren.'
+      }
+    };
+    var LOC = { fr: 'fr-FR', en: 'en-GB', de: 'de-DE' };
+    var current = 'fr';
+
+    function fmt(v, lang) {
+      return new Intl.NumberFormat(LOC[lang], { maximumFractionDigits: 2 }).format(v);
+    }
+    function dist(v, kind, lang) {
+      if (kind === 'swim' && v < 1) return Math.round(v * 1000) + ' m';
+      return fmt(v, lang) + ' km';
+    }
+
+    var status = document.getElementById('copy-status');
+
+    function apply(lang) {
+      current = lang;
+      var d = T[lang];
+      document.documentElement.lang = lang;
+      Array.prototype.forEach.call(document.querySelectorAll('[data-i]'), function (el) {
+        var k = el.getAttribute('data-i');
+        if (d[k] !== undefined) el.textContent = d[k];
+      });
+      Array.prototype.forEach.call(document.querySelectorAll('[data-leg]'), function (el) {
+        var kind = el.getAttribute('data-leg');
+        var v = parseFloat(el.getAttribute('data-v'));
+        el.textContent = d.leg[kind].replace('{n}', dist(v, kind, lang));
+      });
+      Array.prototype.forEach.call(document.querySelectorAll('[data-total]'), function (el) {
+        el.textContent = d.total.replace('{n}', fmt(parseFloat(el.getAttribute('data-total')), lang));
+      });
+      Array.prototype.forEach.call(document.querySelectorAll('.format'), function (row) {
+        var name = row.querySelector('.name [data-i]').textContent;
+        var legs = Array.prototype.map.call(row.querySelectorAll('[data-leg]'), function (s) { return s.textContent; });
+        row.querySelector('.bar').setAttribute('aria-label', name + ': ' + legs.join(', '));
+      });
+      Array.prototype.forEach.call(document.querySelectorAll('.lang button'), function (b) {
+        b.setAttribute('aria-pressed', b.getAttribute('data-lang') === lang ? 'true' : 'false');
+      });
+      document.querySelector('.lang').setAttribute('aria-label', d.group);
+      status.textContent = '';
+      try { localStorage.setItem('tt-lang', lang); } catch (e) {}
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll('.lang button'), function (b) {
+      b.addEventListener('click', function () { apply(b.getAttribute('data-lang')); });
+    });
+
+    var start = 'fr';
+    try {
+      var saved = localStorage.getItem('tt-lang');
+      if (saved && T[saved]) start = saved;
+      else {
+        var nav = ((navigator.language || 'fr') + '').slice(0, 2).toLowerCase();
+        if (T[nav]) start = nav;
+      }
+    } catch (e) {}
+    if (start !== 'fr') apply(start);
+
+    var btn = document.getElementById('copy-btn');
+    var textEl = document.getElementById('mail-text');
+    function selectText() {
+      var range = document.createRange();
+      range.selectNodeContents(textEl);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    }
+    btn.addEventListener('click', function () {
+      var value = textEl.textContent.trim();
+      function fallback() {
+        selectText();
+        status.textContent = T[current].select;
+      }
+      try {
+        navigator.clipboard.writeText(value).then(function () {
+          status.textContent = T[current].copied;
+        }, fallback);
+      } catch (e) { fallback(); }
+    });
+  })();
+</script>
+</body>
+</html>
